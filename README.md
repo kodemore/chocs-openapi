@@ -1,4 +1,4 @@
-# Chocs-OpenApi
+# Chocs-OpenApi <br> [![CI](https://github.com/kodemore/chocs-openapi/actions/workflows/main.yaml/badge.svg?branch=main)](https://github.com/kodemore/chocs-openapi/actions/workflows/main.yaml)[![Release](https://github.com/kodemore/chocs-openapi/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/kodemore/chocs-openapi/actions/workflows/release.yml)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 OpenApi middleware for chocs library.
 
 Newest OpenAPI Specification (v.3.x) can be easily integrated into Chocs through application's middleware. 
