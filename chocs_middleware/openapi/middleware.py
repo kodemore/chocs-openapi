@@ -23,7 +23,7 @@ class OpenApiMiddleware(Middleware):
             "headers": validate_headers,
             "query": validate_query,
             "path": validate_path,
-            "cookies": validate_cookies
+            "cookies": validate_cookies,
         }
 
         self._validators: Dict[str, List[Callable]] = {}
@@ -49,12 +49,10 @@ class OpenApiMiddleware(Middleware):
 
         return next(request)
 
-    def _get_validators_for_uri(
-        self, route: str, method: HttpMethod, content_type: str
-    ) -> List[Callable]:
+    def _get_validators_for_uri(self, route: str, method: HttpMethod, content_type: str) -> List[Callable]:
         path = route.replace("/", "\\/")
         method_name = str(method).lower()
-        validators = []
+        validators: List[Callable] = []
 
         try:
             open_api_uri_schema = self.openapi.query(f"/paths/{path}")
@@ -69,7 +67,9 @@ class OpenApiMiddleware(Middleware):
                 and content_type in open_api_method_schema["requestBody"]["content"]
                 and "schema" in open_api_method_schema["requestBody"]["content"][content_type]
             ):
-                validators.append(RequestBodyValidator(open_api_method_schema["requestBody"]["content"][content_type]["schema"]))
+                validators.append(
+                    RequestBodyValidator(open_api_method_schema["requestBody"]["content"][content_type]["schema"])
+                )
 
         uri_parameters = []
         if "parameters" in open_api_uri_schema:

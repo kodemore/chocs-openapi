@@ -6,7 +6,7 @@ class RequestValidationError(ValidationError):
     message = "Failed to validate request: {reason}"
 
     @classmethod
-    def for_invalid_body(cls) -> 'RequestValidationError':
+    def for_invalid_body(cls) -> "RequestValidationError":
         return cls(reason="Request's content type is invalid.")
 
 

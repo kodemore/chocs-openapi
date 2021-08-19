@@ -6,8 +6,14 @@ from chocs import HttpRequest, Route, HttpHeaders
 from opyapi import build_validator_for
 from opyapi.errors import ValidationError
 
-from chocs_middleware.openapi.error import RequestValidationError, RequestBodyValidationError, \
-    RequestPathValidationError, RequestHeadersValidationError, RequestQueryValidationError, RequestCookiesValidationError
+from chocs_middleware.openapi.error import (
+    RequestValidationError,
+    RequestBodyValidationError,
+    RequestPathValidationError,
+    RequestHeadersValidationError,
+    RequestQueryValidationError,
+    RequestCookiesValidationError,
+)
 
 
 class Validator(ABC):
@@ -104,3 +110,5 @@ def create_request_validator(validator_type: str, schema: Any) -> Validator:
         return RequestHeadersValidator(schema)
     if validator_type == "cookie":
         return RequestCookiesValidator(schema)
+
+    raise ValueError("Unexpected validator type")
