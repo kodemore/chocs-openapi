@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chocs_middleware.openapi"
-version = "1.0.0"
+version = "1.0.1"
 description = "Middleware to validate incoming requests with openapi spec."
 authors = [
     "Dawid Kraczkowski <dawid.kraczkowski@gmail.com>"
