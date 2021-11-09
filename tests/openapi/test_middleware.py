@@ -79,3 +79,24 @@ def test_can_pass_validate_request_parameters() -> None:
 
     # then
     assert response == success_response
+
+
+def test_request_with_no_openapi_definition_is_valid() -> None:
+    # given
+    dirname = path.dirname(__file__)
+    middleware = OpenApiMiddleware(path.join(dirname, "../fixtures/openapi.yml"))
+    request = HttpRequest(
+        HttpMethod.GET,
+        "/non_existent_endpoint_XYZ",
+    )
+    request.route = Route("/non_existent_endpoint_XYZ")
+    success_response = HttpResponse()
+
+    def _next(request: HttpRequest) -> HttpResponse:
+        return success_response
+
+    # when
+    response = middleware.handle(request, _next)
+
+    # then
+    assert response == success_response

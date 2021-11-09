@@ -57,7 +57,7 @@ class OpenApiMiddleware(Middleware):
         try:
             open_api_uri_schema = self.openapi.query(f"/paths/{path}")
             open_api_method_schema = open_api_uri_schema[method_name]
-        except KeyError:
+        except (KeyError, LookupError):
             return validators
 
         if self.validators["body"]:
