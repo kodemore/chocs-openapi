@@ -100,3 +100,26 @@ def test_request_with_no_openapi_definition_is_valid() -> None:
 
     # then
     assert response == success_response
+
+
+def test_can_map_complex_content_type() -> None:
+    # given
+    dirname = path.dirname(__file__)
+    middleware = OpenApiMiddleware(path.join(dirname, "../fixtures/openapi.yml"))
+    request_payload = {
+        "base_tag": "Good boi!"
+    }
+    request = HttpRequest(
+        HttpMethod.POST,
+        "/pets",
+        body=json.dumps(request_payload),
+        headers={"content-type": "application/json;encoding=utf8"}
+    )
+    request.route = Route("/pets")
+
+    def _next(request: HttpRequest) -> HttpResponse:
+        return HttpResponse()
+
+    # then
+    with pytest.raises(RequestBodyValidationError):
+        middleware.handle(request, _next)

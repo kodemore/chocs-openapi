@@ -13,7 +13,7 @@ Open api integration can be used to:
 - validate request's headers
 - validate request's query parameters
 - validate request's cookies  
-- json references
+- generate dtos from openapi file
 
 ## Installation
 
