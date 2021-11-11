@@ -28,11 +28,8 @@ def test_pass_request_body_validator() -> None:
         headers={"content-type": "application/json"}
     )
 
-    # when
-    validator(request)
-
     # then
-    assert isinstance(request.parsed_body["dob"], datetime.date)
+    validator(request)
 
 
 def test_fails_request_body_validator_without_correct_content_headers() -> None:
@@ -94,11 +91,8 @@ def test_pass_request_query_validator() -> None:
         query_string="name=Bob&dob=1970-12-01"
     )
 
-    # when
-    validator(request)
-
     # then
-    assert isinstance(request.query_string["dob"], datetime.date)
+    validator(request)
 
 
 def test_fail_request_query_validator() -> None:
@@ -138,11 +132,8 @@ def test_pass_request_path_validator() -> None:
     request.route = route.match(request.path)
     request.path_parameters = route.parameters
 
-    # when
-    validator(request)
-
     # then
-    assert isinstance(request.path_parameters["dob"], datetime.date)
+    validator(request)
 
 
 def test_fail_request_path_validator() -> None:
@@ -181,11 +172,8 @@ def test_pass_request_headers_validator() -> None:
         "dob": "1970-01-01"
     })
 
-    # when
-    validator(request)
-
     # then
-    assert isinstance(request.headers["dob"], datetime.date)
+    validator(request)
 
 
 def test_fail_request_headers_validator() -> None:
@@ -222,11 +210,8 @@ def test_pass_request_cookies_validator() -> None:
     headers.set("cookie", "name=Bob;dob=1970-01-01")
     request = HttpRequest(HttpMethod.GET, headers=headers)
 
-    # when
-    validator(request)
-
     # then
-    assert isinstance(request.cookies["dob"].value, datetime.date)
+    validator(request)
 
 
 def test_fail_request_cookies_validator() -> None:

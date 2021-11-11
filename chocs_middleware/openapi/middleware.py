@@ -33,6 +33,9 @@ class OpenApiMiddleware(Middleware):
         if not route:
             return next(request)
 
+        if route and "skip_validation" in route.attributes and route.attributes["skip_validation"]:
+            return next(request)
+
         validator_cache_key = f"{request.method} {route.route}".lower()
         if validator_cache_key not in self._validators:
             self._validators[validator_cache_key] = self._get_validators_for_uri(
@@ -53,6 +56,7 @@ class OpenApiMiddleware(Middleware):
         path = route.replace("/", "\\/")
         method_name = str(method).lower()
         validators: List[Callable] = []
+        content_type = content_type.split(";")[0].strip()  # e.g. application/json ; encoding=utf8
 
         try:
             open_api_uri_schema = self.openapi.query(f"/paths/{path}")
