@@ -130,7 +130,7 @@ def test_pass_request_path_validator() -> None:
     request = HttpRequest(HttpMethod.GET, path="/users/bob/1970-12-01")
     route = Route("/users/{name}/{dob}")
     request.route = route.match(request.path)
-    request.path_parameters = route.parameters
+    request.path_parameters = request.route.parameters
 
     # then
     validator(request)
