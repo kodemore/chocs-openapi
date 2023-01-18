@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chocs_middleware.openapi"
-version = "1.2.0"
+version = "1.2.1"
 description = "Middleware to validate incoming requests with openapi spec."
 authors = [
     "Dawid Kraczkowski <dawid.kraczkowski@gmail.com>"
@@ -33,7 +33,6 @@ classifiers = [
 python = "^3.8"
 chocs = "^1.6.1"
 opyapi = "^1.3.1"
-bson = "^0.5.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.1.0"
